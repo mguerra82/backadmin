@@ -28,6 +28,6 @@ dbconexion();
 app.use('/api/usuarios', require('./routes/usuarios'));
 
 
-app.listen( 8080, ()=>{
+app.listen( 3001, ()=>{
     console.log('Servidor corriendo en el puerto ' + process.env.PORT );
 } )
