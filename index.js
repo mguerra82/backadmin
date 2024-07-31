@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const { dbconexion, testConenection } = require('./database/config');
 const cors = require('cors');
+const { corsOptions } = require('../backAdmin/middlewares/cors')
 
 
 /**
@@ -11,8 +12,12 @@ const cors = require('cors');
 const app = express();
 /**
  * Cors
- */
-app.use(cors());
+ 
+const corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // For legacy browser support
+}*/
+app.use(cors(corsOptions));
 /**
  * Permite objetos json
  */
