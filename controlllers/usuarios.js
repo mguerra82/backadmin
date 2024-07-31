@@ -22,6 +22,7 @@ const getUsuarios = async (req, res) => {
             statusCode: 200,
             usuario: result
         });
+        console.log('consulta zatisfactoria')
 
         con.con.end();
     });
