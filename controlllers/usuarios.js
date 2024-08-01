@@ -45,7 +45,7 @@ const crearUsuarios = async (req, res) => {
                 ok: false,
                 msn:'Error al consultar la base de datos.'
             });
-           
+            con.con.release();
             console.log('ERRROR----->', err.message);
              return;
         }
@@ -56,13 +56,14 @@ const crearUsuarios = async (req, res) => {
                 ok: false,
                 msn:result[0][0]
             });
+            con.con.release();
         } else {
             res.json({
                 ok: true,
                 statusCode: 200,
                 usuario: result[0][0]
             });
-            con.con.end();
+            con.con.release();
             return;
         }
     });
