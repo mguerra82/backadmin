@@ -1,8 +1,5 @@
-//const Usuario = require('../models/usuario');
 const con = require('../database/config');
-
-//const Musuario = require('../models/usuario')
-
+const bcript = require('bcryptjs');
 
 const getUsuarios = async (req, res) => {
     //const result = [];
@@ -36,9 +33,19 @@ const getUsuarios = async (req, res) => {
 }
 
 const crearUsuarios = async (req, res) => {
-
+    
     const { idper, usuario, pass, tk, email, rol, intentos } = req.body;
+    console.log ('constraseña..----> ' ,{ idper, usuario, pass, tk, email, rol, intentos });
+    /**
+     * Encriptar contraseña.
+     */
+    const salt = bcript.genSaltSync();
+    console.log ('Hash de encriptacion de constraseña.. ',salt);
+    
 
+    //pass = bcript.hashSync(salt);
+    //console.log ('Password encriptado.... ',pass);
+/*
     con.con.query(`call MandameApp.insert_usuario(?,?,?,?,?,?,?,@codigo, @mensaje)`, [idper, usuario, pass, tk, email, rol, intentos], function (err, result, fields) {
         if (err) {
             con.con.end();
@@ -47,8 +54,6 @@ const crearUsuarios = async (req, res) => {
                 msn:'Error al consultar la base de datos.'
             });
             console.log('ERRROR----->', err.sqlMessage);
-            
-            
              return;
         }
        
@@ -68,7 +73,11 @@ const crearUsuarios = async (req, res) => {
             return;
         }
         
-    });
+    });*/
+    res.json({
+        ok: true,
+        statusCode: 200,
+        msn: 'POST'});
 }
 module.exports = {
 
