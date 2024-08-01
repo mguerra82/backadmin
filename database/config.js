@@ -1,3 +1,32 @@
+
+
+const mysql = require('mysql');
+require("dotenv").config();
+
+const con = mysql.createConnection
+    ({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE,
+        port: 3306
+    });
+try {
+    con.connect(function (err) {
+        console.log('Conectado');
+    })
+} catch (error) {
+    if (error) throw err;
+    console.log('Error en la conexion, ', error);
+}
+
+
+module.exports = {
+    con
+} 
+
+
+
 /**const mysql = require('mysql2/promise');
 
 async function dbconexion(){
@@ -52,28 +81,3 @@ async function testConenection(){
 }
 */
 //Conexion funsional
-
-const mysql = require('mysql');
-require("dotenv").config();
-
-const con = mysql.createConnection
-    ({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE,
-        port: 3306
-    });
-try {
-    con.connect(function (err) {
-        console.log('Conectado');
-    })
-} catch (error) {
-    if (error) throw err;
-    console.log('Error en la conexion, ', error);
-}
-
-
-module.exports = {
-    con
-} 
