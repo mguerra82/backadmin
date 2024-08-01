@@ -6,6 +6,43 @@ require("dotenv").config();
 const con = mysql.createConnection
     ({
         host: process.env.HOST,
+        user: process.env.USUARIO,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE,
+        port: 3306
+    });
+    /*
+try {
+    con.connect(function (err) {
+        console.log('Conectado');
+    })
+} catch (error) {
+    if (error) throw err;
+    return;
+    console.log('Error en la conexion, ', error);
+}
+
+*/
+module.exports = {
+    con
+} 
+
+
+
+/**
+ * 
+ * 
+ *
+ * 
+
+Funcional.
+
+const mysql = require('mysql');
+require("dotenv").config();
+
+const con = mysql.createConnection
+    ({
+        host: process.env.HOST,
         user: process.env.USER,
         password: process.env.PASSWORD,
         database: process.env.DATABASE,
@@ -27,7 +64,20 @@ module.exports = {
 
 
 
-/**const mysql = require('mysql2/promise');
+
+
+
+
+
+
+
+
+
+
+
+
+
+const mysql = require('mysql2/promise');
 
 async function dbconexion(){
     try {

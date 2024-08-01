@@ -14,7 +14,8 @@ const getUsuarios = async (req, res) => {
                 ok: false,
                 statusCode: 400
             });
-            console.log('ERRROR----->', err.message);
+            console.log('ERRROR----->', err);
+            //con.con.end();
             return;
             
         }else{
@@ -26,7 +27,7 @@ const getUsuarios = async (req, res) => {
         });
         console.log('consulta zatisfactoria')
 
-        con.con.end();
+        //con.con.end(); 
         return;
         }
        
@@ -45,18 +46,18 @@ const crearUsuarios = async (req, res) => {
                 ok: false,
                 msn:'Error al consultar la base de datos.'
             });
-            con.con.release();
-            console.log('ERRROR----->', err.message);
+            console.log('ERRROR----->', err.sqlMessage);
+            
+            
              return;
         }
-        //console.log('RESULT --->', result[0][0].codigo);
-        
+       
         if (result[0][0].codigo === 2) {
             return res.status(400).json({
                 ok: false,
                 msn:result[0][0]
             });
-            con.con.release();
+            
         } else {
             res.json({
                 ok: true,
@@ -66,6 +67,7 @@ const crearUsuarios = async (req, res) => {
             con.con.release();
             return;
         }
+        
     });
 }
 module.exports = {
