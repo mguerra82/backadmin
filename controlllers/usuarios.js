@@ -6,7 +6,7 @@ const getUsuarios = async (req, res) => {
     // await con.con.query('SELECT id, idCodPer, usuario, password, token, email, rol, intentos FROM MandameApp.usuario', function (err, result, fields) {
     await con.con.query(`call MandameApp.procedure(@codigo, @mensaje)`, function (err, result, fields) {
         if (err) {
-            con.con.end();
+            
             res.json({
                 ok: false,
                 statusCode: 400
@@ -38,17 +38,17 @@ const crearUsuarios = async (req, res) => {
     console.log ('constraseña..----> ' ,{ idper, usuario, pass, tk, email, rol, intentos });
     /**
      * Encriptar contraseña.
-     */
-    const salt = bcript.genSaltSync();
+     */                 
+    const salt = bcript.genSaltSync(10);
     console.log ('Hash de encriptacion de constraseña.. ',salt);
     
+    const passw = bcript.hashSync(pass, salt);
+    
+    console.log ('Password encriptado.... ',passw);
 
-    //pass = bcript.hashSync(salt);
-    //console.log ('Password encriptado.... ',pass);
-/*
-    con.con.query(`call MandameApp.insert_usuario(?,?,?,?,?,?,?,@codigo, @mensaje)`, [idper, usuario, pass, tk, email, rol, intentos], function (err, result, fields) {
+    con.con.query(`call MandameApp.insert_usuario(?,?,?,?,?,?,?,@codigo, @mensaje)`, [idper, usuario, passw, tk, email, rol, intentos], function (err, result, fields) {
         if (err) {
-            con.con.end();
+           
             res.status(400).json({
                 ok: false,
                 msn:'Error al consultar la base de datos.'
@@ -69,15 +69,15 @@ const crearUsuarios = async (req, res) => {
                 statusCode: 200,
                 usuario: result[0][0]
             });
-            con.con.release();
+            
             return;
         }
         
-    });*/
+    });/*
     res.json({
         ok: true,
         statusCode: 200,
-        msn: 'POST'});
+        msn: 'POST'});*/
 }
 module.exports = {
 
