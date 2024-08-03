@@ -114,7 +114,6 @@ const deleteUsuario = (req, res) =>{
     })
 }
 module.exports = {
-
     getUsuarios,
     crearUsuarios,
     actualizaUsuario,
