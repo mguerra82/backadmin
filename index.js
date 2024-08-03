@@ -10,12 +10,8 @@ const cors = require('cors');
  */
 const app = express();
 /**
- * Cors
- 
-const corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200 // For legacy browser support
-}*/
+ * CORS
+ */
 app.use(cors());
 /**
  * Permite objetos json
@@ -23,11 +19,12 @@ app.use(cors());
 app.use( express.json() );
 /**
  * Base de Datos
-
+ 
 dbconexion();
- */
+*/
 
 app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
 
 
 app.listen( 8080, ()=>{
